@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccountKata.Library", "BankAccountKata.Library\BankAccountKata.Library.csproj", "{76BCC9C7-988F-42B4-8C88-11934DA6E89E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76BCC9C7-988F-42B4-8C88-11934DA6E89E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76BCC9C7-988F-42B4-8C88-11934DA6E89E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76BCC9C7-988F-42B4-8C88-11934DA6E89E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76BCC9C7-988F-42B4-8C88-11934DA6E89E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB8B59BD-207E-40B6-9A9F-E5E5E7284771}
+	EndGlobalSection
+EndGlobal
