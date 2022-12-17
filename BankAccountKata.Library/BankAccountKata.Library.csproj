@@ -8,4 +8,12 @@
     <Platforms>x64</Platforms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="bankaccount.proto" GrpcServices="Both" />
+	</ItemGroup>
+
 </Project>

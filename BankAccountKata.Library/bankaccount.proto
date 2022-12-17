@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "BankAccountKataGrpc";
+
+package BankAccountKataGrpc;
+
+service BankAccountKata {
+  rpc RequestCreateAccount (AccountEntity) returns (AccountEntity);
+  rpc MakeDepositRequest (AccountEntity) returns(AccountEntity);
+}
+
+message DepositReply {
+  double amount = 1;
+}
+message AccountEntity
+{
+  string name = 1;
+  double amount = 2;
+}

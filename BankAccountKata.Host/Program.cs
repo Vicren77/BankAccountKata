@@ -1,16 +1,30 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using BankAccountKata.Host;
+using BankAccountKata.Library;
 using BankAccountKata.Host.BankAccountDb;
+using BankAccountKata.Library.Interfaces;
+using BankAccountKata.Host.Repository;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
-IHost host = Host.CreateDefaultBuilder(args)
-    .UseEnvironment("Development")
-    .ConfigureServices((hostContext,services) =>
+public class Program
+{
+    public static void Main(string[] args)
     {
-        services.AddHostedService<Worker>();
-        services.AddDbContext<BankAccountDbContext>(
-            option => option.UseSqlServer("ConnectionString"));
-    })
-    .Build();
+        CreateHostBuilder(args).Build().Run();
+    }
 
-await host.RunAsync();
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            //.UseWindowsService()
+            .ConfigureServices((hostContext, services) =>
+            {
+                services.AddHostedService<Worker>();
+                services.AddScoped<IBankAccountOperationHandler, AccountRepository>();
+                services.AddScoped<IRequestUserAccountHandler, RequestUserAccountHandler>();
+                services.AddSingleton<AccountRepository>();
+                services.AddDbContextFactory<BankAccountDbContext>(
+                    option => option.UseSqlServer("ConnectionString"));
+            });
+}

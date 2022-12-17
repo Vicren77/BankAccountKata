@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BankAccountKataGrpc;
 
 namespace BankAccountKata.Library.Interfaces
 {
     public interface IBankAccountOperationHandler
     {
-        public void CreateAccount(AccountEntity accountEntity);
-        public double Deposit(AccountEntity accountEntity);
+        public Task<AccountEntity> CreateAccount(AccountEntity accountEntity);
+        public Task<AccountEntity> Deposit(AccountEntity accountEntity);
 
     }
 }
