@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BankAccountKataGrpc;
+using Grpc.Core;
 
 namespace BankAccountKata.Library.Interfaces
 {
@@ -23,6 +24,16 @@ namespace BankAccountKata.Library.Interfaces
         public Task<AccountEntity> MakeDepositRequest(AccountEntity accountEntity)
         {
             return _operationHandler.Deposit(accountEntity);
+        }
+
+        public Task<AccountEntity> MakeWithdrawRequest(AccountEntity accountEntity)
+        {
+            return _operationHandler.Withdraw(accountEntity);
+        }
+
+        public async Task GetHistory(HistoryRequest historyRequest, IServerStreamWriter<HistoryReply> responseStream)
+        {
+            await _operationHandler.GetTransaction(historyRequest, responseStream);
         }
     }
 }

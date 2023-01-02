@@ -9,6 +9,7 @@ using BankAccountKata.Library.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using BankAccountKataGrpc;
 using System.Globalization;
+using Grpc.Core;
 
 namespace BankAccountKataGrpc.Host.Repository
 {
@@ -52,9 +53,21 @@ namespace BankAccountKataGrpc.Host.Repository
             using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 var record = dbContext.Accounts.FirstOrDefault(account => account.Name == accountEntity.Name);
+                if (record == null) { throw new ArgumentException(nameof(accountEntity.Name), "you are trying to add money from non existing account"); }
 
                 record.Balance = record.Balance + accountEntity.Amount;
+
+                History history = new History
+                {
+                    Name = accountEntity.Name,
+                    Operation = "Deposit",
+                    Date = DateTime.Now,
+                    Amount = accountEntity.Amount,
+                    Balance = record.Balance,
+                };
+                dbContext.History.AddRange(history);
                 dbContext.SaveChanges();
+
                 return Task.FromResult(new AccountEntity
                 {
                     Name = accountEntity.Name,
@@ -65,5 +78,55 @@ namespace BankAccountKataGrpc.Host.Repository
             }
 
         }
+        public Task<AccountEntity> Withdraw(AccountEntity accountEntity)
+        {
+
+            using (var dbContext = _dbContextFactory.CreateDbContext())
+            {
+                var record = dbContext.Accounts.FirstOrDefault(account => account.Name == accountEntity.Name);
+                if(record == null) { throw new ArgumentException(nameof(accountEntity.Name), "you are trying to withdray money from non existing account"); }
+                if(record.Balance <= accountEntity.Amount) { throw new ArgumentException(nameof(accountEntity.Amount), "Withdrawal exceeds balance!"); }
+                record.Balance = record.Balance - accountEntity.Amount;
+
+                History history = new History
+                {
+                    Name=accountEntity.Name,
+                    Operation = "Withdraw",
+                    Date = DateTime.Now,
+                    Amount = accountEntity.Amount,
+                    Balance = record.Balance,
+                };
+                dbContext.History.AddRange(history);
+                dbContext.SaveChanges();
+
+                return Task.FromResult(new AccountEntity
+                {
+                    Name = accountEntity.Name,
+                    Amount = dbContext.Accounts.Where(name => name.Name == accountEntity.Name).Select(balance => balance.Balance).FirstOrDefault(),
+                });
+
+            }
+        }
+        public async Task GetTransaction(HistoryRequest historyRequest, IServerStreamWriter<HistoryReply> responseStream)
+        {
+            using (var dbContext = _dbContextFactory.CreateDbContext())
+            {
+                var record = dbContext.History.Where(account => account.Name == historyRequest.Name).ToList();
+                foreach(var transaction in record)
+                {
+                    await responseStream.WriteAsync(new HistoryReply
+                    {
+                        Name = transaction.Name,
+                        OperationType = transaction.Operation,
+                        OperationDate = transaction.Date.ToString(),
+                        Amount = transaction.Amount,
+                        Balance = transaction.Balance
+                    });
+                }
+
+            }
+
+        }
+        
     }
 }

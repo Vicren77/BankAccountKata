@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BankAccountKataGrpc;
+using Grpc.Core;
 
 namespace BankAccountKata.Library.Interfaces
 {
@@ -11,5 +12,8 @@ namespace BankAccountKata.Library.Interfaces
     {
         public Task<AccountEntity> RequestCreateAccount(AccountEntity accountEntity);
         public Task<AccountEntity> MakeDepositRequest(AccountEntity accountEntity);
+
+        public Task<AccountEntity> MakeWithdrawRequest(AccountEntity accountEntity);
+        public Task GetHistory(HistoryRequest historyRequest, IServerStreamWriter<HistoryReply> responseStream);
     }
 }

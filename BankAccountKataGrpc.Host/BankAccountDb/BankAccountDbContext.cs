@@ -19,6 +19,7 @@ namespace BankAccountKataGrpc.Host.BankAccountDb
         }
 
         public virtual DbSet<Accounts> Accounts { get; set; }
+        public virtual DbSet<History> History { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +36,33 @@ namespace BankAccountKataGrpc.Host.BankAccountDb
                     .HasColumnName("NAME");
 
                 entity.Property(e => e.Balance).HasColumnName("BALANCE");
+            });
+
+            modelBuilder.Entity<History>(entity =>
+            {
+                entity.HasKey(e => new { e.Name, e.Date, e.Amount, e.Balance })
+                    .HasName("PK__HISTORY__ACDF471120692552");
+
+                entity.ToTable("HISTORY");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("NAME");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasColumnName("DATE");
+
+                entity.Property(e => e.Amount).HasColumnName("AMOUNT");
+
+                entity.Property(e => e.Balance).HasColumnName("BALANCE");
+
+                entity.Property(e => e.Operation)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("OPERATION");
             });
 
             OnModelCreatingPartial(modelBuilder);

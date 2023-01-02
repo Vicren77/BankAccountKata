@@ -27,5 +27,14 @@ namespace BankAccountKata.Library.Server
         {
             return _requestUserAccountHandler.MakeDepositRequest(accountEntity);
         }
+
+       public override Task<AccountEntity> MakeWithdrawRequest(AccountEntity request, ServerCallContext context)
+        {
+            return _requestUserAccountHandler.MakeWithdrawRequest(request);
+        }
+        public override async Task GetHistory(HistoryRequest request, IServerStreamWriter<HistoryReply> responseStream, ServerCallContext context)
+        {
+            await _requestUserAccountHandler.GetHistory(request, responseStream);
+        }
     }
 }

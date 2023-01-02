@@ -17,6 +17,10 @@
       {
          "Name": "[dbo].[ACCOUNTS]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HISTORY]",
+         "ObjectType": 0
       }
    ],
    "UiHint": "MSI\\SQLEXPRESS.BankAccount",

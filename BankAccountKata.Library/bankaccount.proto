@@ -7,10 +7,21 @@ package BankAccountKataGrpc;
 service BankAccountKata {
   rpc RequestCreateAccount (AccountEntity) returns (AccountEntity);
   rpc MakeDepositRequest (AccountEntity) returns(AccountEntity);
+  rpc MakeWithdrawRequest (AccountEntity) returns (AccountEntity);
+  rpc GetHistory (HistoryRequest) returns (stream HistoryReply);
 }
+message HistoryRequest
+{
+	string name = 1;
+}
+message HistoryReply
+{
+	string name = 1;
+	string operationType = 2;
+	string operationDate = 3;
+	double amount = 4;
+	double balance = 5;
 
-message DepositReply {
-  double amount = 1;
 }
 message AccountEntity
 {
