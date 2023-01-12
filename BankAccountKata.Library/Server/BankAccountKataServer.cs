@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BankAccountKataGrpc;
+using BankAccountKata;
 using Grpc.Core;
 using Microsoft.Extensions.Configuration;
 
 namespace BankAccountKata.Library.Server
 {
-    public class BankAccountKataServer : BankAccountKataGrpc.BankAccountKata.BankAccountKataBase
+    public class BankAccountKataServer : BankAccountKata.BankAccountKataBase
     {
         private readonly IRequestUserAccountHandler _requestUserAccountHandler;
         private readonly IConfiguration _configuration;

@@ -7,9 +7,10 @@ using BankAccountKataGrpc.Host.BankAccountDb;
 using BankAccountKata.Library;
 using BankAccountKata.Library.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using BankAccountKataGrpc;
+using BankAccountKata;
 using System.Globalization;
 using Grpc.Core;
+using System.Linq;
 
 namespace BankAccountKataGrpc.Host.Repository
 {
@@ -23,6 +24,7 @@ namespace BankAccountKataGrpc.Host.Repository
         }
         public Task<AccountEntity> CreateAccount(AccountEntity accountEntity)
         {
+            if(accountEntity.Name == "") { throw new ArgumentException(nameof(accountEntity.Name), "account creation name input shoud not be void"); }
             using (var dbContext = _dbContextFactory.CreateDbContext())
             {
                 if (dbContext.Accounts.Any(name => name.Name == accountEntity.Name))
@@ -109,8 +111,12 @@ namespace BankAccountKataGrpc.Host.Repository
         }
         public async Task GetTransaction(HistoryRequest historyRequest, IServerStreamWriter<HistoryReply> responseStream)
         {
+
             using (var dbContext = _dbContextFactory.CreateDbContext())
             {
+                var checkRecord = dbContext.History.FirstOrDefault(account => account.Name == historyRequest.Name);
+                if (checkRecord == null) { throw new ArgumentException(nameof(historyRequest.Name), "you are trying to get history transaction from non existing account"); }
+
                 var record = dbContext.History.Where(account => account.Name == historyRequest.Name).ToList();
                 foreach(var transaction in record)
                 {
@@ -123,7 +129,7 @@ namespace BankAccountKataGrpc.Host.Repository
                         Balance = transaction.Balance
                     });
                 }
-
+                 
             }
 
         }

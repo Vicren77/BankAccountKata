@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using BankAccountKata;
 using BankAccountKataGrpc.Host.BankAccountDb;
 using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -17,9 +18,10 @@ using Grpc.Core;
 namespace BankAccountKataGrpc.Host.Repository.Tests
 {
     [TestClass()]
-    public class AccountRepositoryTests : IDbContextFactory<BankAccountDbContext>
+    public class AccountRepositoryTests : IDbContextFactory<BankAccountDbContext>, IServerStreamWriter<HistoryReply>
     {
         private DbContextOptions<BankAccountDbContext> _options;
+
         public AccountRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<BankAccountDbContext>()
@@ -70,17 +72,16 @@ namespace BankAccountKataGrpc.Host.Repository.Tests
             Assert.AreEqual(expected, a.Result.Amount);
         }
 
-        [TestMethod()]
-        public void GetTransactionTest()
-        {
-            var account = new AccountRepository(new AccountRepositoryTests());
-
-            //account.GetTransaction(new HistoryRequest() { Name = "Trump" });
-        }
 
         public BankAccountDbContext CreateDbContext()
         {
             return new BankAccountDbContext(_options);
+        }
+        public WriteOptions WriteOptions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public Task WriteAsync(HistoryReply message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

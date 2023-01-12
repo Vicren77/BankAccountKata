@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option csharp_namespace = "BankAccountKata";
+
+package BankAccountKata;
+
+import "google/api/annotations.proto";
+
+service BankAccountKata {
+
+  rpc MakeDepositRequest (AccountEntity) returns(AccountEntity){
+	 option (google.api.http) = {
+      post: "/v1/BankAccountKata",
+      body: "*"
+    };
+  }
+	
+  rpc RequestCreateAccount (AccountEntity) returns (AccountEntity){
+  	 option (google.api.http) = {
+      put: "/v1/BankAccountKata",
+      body: "*"
+    };
+  }
+	
+
+  rpc MakeWithdrawRequest (AccountEntity) returns (AccountEntity)
+  {
+	  option (google.api.http) = {
+      put: "/v1/BankAccountKata",
+      body: "*"
+    };
+  }
+ 
+  rpc GetHistory (HistoryRequest) returns (stream HistoryReply){
+	  option (google.api.http) = {
+      get: "/v1/BankAccountKata/{name}",
+    };
+}
+}
+message HistoryRequest
+{
+	string name = 1;
+}
+message HistoryReply
+{
+	string name = 1;
+	string operationType = 2;
+	string operationDate = 3;
+	double amount = 4;
+	double balance = 5;
+
+}
+message AccountEntity
+{
+  string name = 1;
+  double amount = 2;
+}
