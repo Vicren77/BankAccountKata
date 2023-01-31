@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccountKata.Library", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccountKataGrpc.Host", "BankAccountKataGrpc.Host\BankAccountKataGrpc.Host.csproj", "{5C1DAD18-33E2-43A2-BE52-B66B22367196}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppTestingClient", "ConsoleAppTestingClient\ConsoleAppTestingClient.csproj", "{8F211006-7CF3-4438-918C-02DBF04FC9B8}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccountKataGrpc.HostTests", "BankAccountKataGrpc.HostTests\BankAccountKataGrpc.HostTests.csproj", "{90965375-108B-43A6-9DAE-946CA0E36CF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccountKataWebAPI", "BankAccountKataWebAPI\BankAccountKataWebAPI.csproj", "{F145E9B3-3276-4D8D-BD50-026589B7C43E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,14 +35,6 @@ Global
 		{5C1DAD18-33E2-43A2-BE52-B66B22367196}.Release|Any CPU.Build.0 = Release|x64
 		{5C1DAD18-33E2-43A2-BE52-B66B22367196}.Release|x64.ActiveCfg = Release|x64
 		{5C1DAD18-33E2-43A2-BE52-B66B22367196}.Release|x64.Build.0 = Release|x64
-		{8F211006-7CF3-4438-918C-02DBF04FC9B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F211006-7CF3-4438-918C-02DBF04FC9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F211006-7CF3-4438-918C-02DBF04FC9B8}.Debug|x64.ActiveCfg = Debug|x64
-		{8F211006-7CF3-4438-918C-02DBF04FC9B8}.Debug|x64.Build.0 = Debug|x64
-		{8F211006-7CF3-4438-918C-02DBF04FC9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F211006-7CF3-4438-918C-02DBF04FC9B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F211006-7CF3-4438-918C-02DBF04FC9B8}.Release|x64.ActiveCfg = Release|x64
-		{8F211006-7CF3-4438-918C-02DBF04FC9B8}.Release|x64.Build.0 = Release|x64
 		{90965375-108B-43A6-9DAE-946CA0E36CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90965375-108B-43A6-9DAE-946CA0E36CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90965375-108B-43A6-9DAE-946CA0E36CF7}.Debug|x64.ActiveCfg = Debug|x64
@@ -51,6 +43,14 @@ Global
 		{90965375-108B-43A6-9DAE-946CA0E36CF7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90965375-108B-43A6-9DAE-946CA0E36CF7}.Release|x64.ActiveCfg = Release|x64
 		{90965375-108B-43A6-9DAE-946CA0E36CF7}.Release|x64.Build.0 = Release|x64
+		{F145E9B3-3276-4D8D-BD50-026589B7C43E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F145E9B3-3276-4D8D-BD50-026589B7C43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F145E9B3-3276-4D8D-BD50-026589B7C43E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F145E9B3-3276-4D8D-BD50-026589B7C43E}.Debug|x64.Build.0 = Debug|Any CPU
+		{F145E9B3-3276-4D8D-BD50-026589B7C43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F145E9B3-3276-4D8D-BD50-026589B7C43E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F145E9B3-3276-4D8D-BD50-026589B7C43E}.Release|x64.ActiveCfg = Release|Any CPU
+		{F145E9B3-3276-4D8D-BD50-026589B7C43E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
